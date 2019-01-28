@@ -1,6 +1,11 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/challenges/challenges",
+    "pages/show/show",
+    "pages/create/create",
+    "pages/profile/profile",
+    "pages/daka/daka",
     "pages/logs/logs"
   ],
   "window":{
