@@ -13,7 +13,14 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    const query3 = Bmob.Query('Challenges');
+    let page = this;
+    query3.get("6EYOKKKl").then(res => {
+      page.setData({ clickChallenge: res });
+      console.log(page.data)
+    }).catch(err => {
+      console.log(err)
+    })
   },
 
   /**
