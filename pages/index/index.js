@@ -1,3 +1,4 @@
+var Bmob = require('../../utils/Bmob-1.6.7.min.js')
 //index.js
 //获取应用实例
 const app = getApp()

@@ -1,3 +1,4 @@
+var Bmob = require('../../utils/Bmob-1.6.7.min.js')
 //logs.js
 const util = require('../../utils/util.js')
 
