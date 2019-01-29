@@ -37,10 +37,15 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
+					"name": "login",
+					"pathName": "pages/index/index"
+        },
+        {
+          "id": -1,
 					"name": "show",
 					"pathName": "pages/show/show"
 				}
