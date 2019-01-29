@@ -5,9 +5,9 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
+    register: true,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
@@ -50,6 +50,48 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+    wx.setStorage({
+      key: 'userinfo',
+      data: app.globalData.userInfo,
+    })
+    const query = Bmob.Query('Users');
+    let page = this;
+    wx.getStorage({
+      key: 'openid',
+      success: function (res) {
+        page.setData({
+          open_id: res.data
+        });
+        query.equalTo('open_id', '==', res.data)
+        query.find().then(res => {
+          if (res.length == 0) {
+            page.setData({
+              register: false
+            })
+          } else {
+            page.setData({
+              register: true
+            })
+            wx.redirectTo({
+              url: '../challenges/challenges',
+            })
+          }
+        })
+      }
+    })
+  },
+  
+  bindRegister: function(e) {
+    console.log(e)
+    const create_user = Bmob.Query('Users');
+    create_user.set('username',this.data.userInfo.nickName);
+    create_user.set('open_id',this.data.open_id);
+    create_user.set('profile',e.detail.value.profile)
+    create_user.save().then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
     })
   }
 })
