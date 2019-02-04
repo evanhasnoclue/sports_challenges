@@ -15,9 +15,6 @@
         <view class='font-title font-bold' style="width: 80%;">{{clickChallenge.name}}</view>
         <image bindtap='checkUser' data-id='{{sport.user.id}}' src='{{sport.user.avatarUrl}}' class='avatar avatar-small' />
       </view>
-      <view class='row-price'>
-        <view class='font-title font-bold font-primary'>RMB {{sport.price}}/person</view>
-      </view>
       <view class='row-location' bindtap='showMap'>
         <image src='../../images/map1.png' class='icon icon-margin' />
         <view class='font-content font-grey address-width'>{{clickChallenge.location}}</view>
@@ -28,7 +25,7 @@
       </view>
       <view class='row-users'>
         <view class='capacity'>
-          <view class='font-content'>{{sport.bookings.length}}/{{clickChallenge.capacity}}</view>
+          <view class='font-content'>{{participants.length}}/{{clickChallenge.capacity}}</view>
         </view>
         <scroll-view class='users' scroll-x>
           <block wx:for='{{sport.bookings}}' wx:key="booking.id" wx:for-item="booking">
