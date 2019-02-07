@@ -1,2 +1,12 @@
 <!--pages/daka/daka.wxml-->
-<text>pages/daka/daka.wxml</text>
+<view class='wrapper'>
+<form bindsubmit='dakasubmit' class='form'>
+    <view class='banner' style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('{{challenge.photo}}');">
+    </view>
+    <view class='content'>
+      <view class='layer'>
+      </view>
+    </view>
+    <view class='footer bottom-fixed'></view>
+    </form>
+</view>
