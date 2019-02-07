@@ -13,7 +13,15 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    let page = this;
+    let challenge_id = 'ZIrt444A';
+    const query = Bmob.Query('Challenges');
+    query.get(challenge_id).then(res => {
+      console.log(res);
+      page.setData({
+        challenge: res
+      })
+    })
   },
 
   /**
