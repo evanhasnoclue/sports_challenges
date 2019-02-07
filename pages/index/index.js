@@ -74,7 +74,7 @@ Page({
               register: true
             })
             wx.redirectTo({
-              url: '../challenges/challenges?user='+res[0].objectId,
+              url: '../challenges/challenges?user_id='+res[0].objectId,
             })
           }
         })
