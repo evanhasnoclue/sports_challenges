@@ -13,7 +13,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    console.log(options)
   },
 
   /**

@@ -74,7 +74,7 @@ Page({
               register: true
             })
             wx.redirectTo({
-              url: '../challenges/challenges',
+              url: '../challenges/challenges?user_id='+res[0].objectId,
             })
           }
         })
@@ -84,12 +84,23 @@ Page({
   
   bindRegister: function(e) {
     console.log(e)
+    let gender = '';
     const create_user = Bmob.Query('Users');
     create_user.set('username',this.data.userInfo.nickName);
     create_user.set('open_id',this.data.open_id);
-    create_user.set('profile',e.detail.value.profile)
+    create_user.set('profile',e.detail.value.profile.toUpperCase());
+    if(this.data.userInfo.gender){
+      gender = '男';
+    }else {
+      gender = '女';
+    };
+    create_user.set('gender',gender);
+    create_user.set('avatar',this.data.userInfo.avatarUrl);
     create_user.save().then(res => {
-      console.log(res)
+      console.log(res);
+      wx.redirectTo({
+        url: '../challenges/challenges?user_id='+res.objectId
+      })
     }).catch(err => {
       console.log(err)
     })
