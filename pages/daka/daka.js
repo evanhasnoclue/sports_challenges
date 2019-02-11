@@ -15,11 +15,14 @@ Page({
   onLoad: function (options) {
     let page = this;
     let challenge_id = 'ZIrt444A';
-    const query = Bmob.Query('Challenges');
-    query.get(challenge_id).then(res => {
+    const query = Bmob.Query('Bookings');
+    query.equalTo('challenge_id', '==', challenge_id);
+    query.include('challenge_id', 'user_id');
+    query.find().then(res => {
       console.log(res);
       page.setData({
-        challenge: res
+        challenge: res[0].challenge_id,
+        bookings: res
       })
     })
   },
