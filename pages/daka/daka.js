@@ -17,7 +17,7 @@ Page({
     let challenge_id = 'ZIrt444A';
     const query = Bmob.Query('Bookings');
     query.equalTo('challenge_id', '==', challenge_id);
-    query.include('challenge_id', 'user_id');
+    query.include('challenge_id', 'user_id','challenge_id.user_id');
     query.find().then(res => {
       console.log(res);
       page.setData({
