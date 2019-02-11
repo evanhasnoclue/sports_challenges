@@ -12,6 +12,12 @@ App({
     // 登录
     wx.login({
       success: res => {
+        Bmob.User.auth().then(res => {
+          console.log(res)
+          console.log('一键登陆成功')
+        }).catch(err => {
+          console.log(err)
+        });
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
