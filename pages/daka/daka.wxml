@@ -1,12 +1,16 @@
 <!--pages/daka/daka.wxml-->
 <view class='wrapper'>
-<form bindsubmit='dakasubmit' class='form'>
     <view class='banner' style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('{{challenge.photo}}');">
     </view>
     <view class='content'>
-      <view class='layer'>
+      <view class='photo-uploader'>
+        <view class='font-title'>上传打卡照片</view>
+        <view class='photo'>
+        <image src='../../images/upload_photo1.png' class='icon' />
+        </view>
+      </view>
+      <view class='checking'>
+
       </view>
     </view>
-    <view class='footer bottom-fixed'></view>
-    </form>
 </view>

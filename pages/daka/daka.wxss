@@ -8,11 +8,6 @@
   align-items: center;
 }
 
-.form {
-  height: 100%;
-  width: 100%;
-}
-
 .banner {
   height: 200px;
   width: 100%;
@@ -22,25 +17,22 @@
 
 .content {
   flex-grow: 1;
-  padding: 40px 10px;
-}
-
-.footer {
-  height: 50px;
+  padding: 0 25px;
   width: 100%;
-  background-color: rgba(255,255,255,1);
 }
 
-.bottom-fixed {
-  position:fixed;
-  bottom: 0;
-  width: 100%;
-  box-shadow:  -5px 0 5px rgba(0,0,0,0.5);
-}
 
-.layer {
-  width: 85%;
-  height: 100%;
+.photo-uploader {
+  width: 100%-50px;
+  height: 200px;
   margin-top: -50px;
+  padding-top: 50px;
+  margin-left: 25px;
+  margin-right: 25px;
   background-color: rgba(255,255,255,0.5);
+}
+
+.icon {
+  width: 55px;
+  height: 50px;
 }
