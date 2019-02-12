@@ -17,6 +17,14 @@ Page({
     })
   },
   onLoad: function () {
+    wx.getStorage({
+      key: 'userinfo',
+      success: function(res) {
+        wx.redirectTo({
+          url: '../challenges/challenges?user_id=' + res.objectId,
+        })
+      },
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -51,10 +59,6 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    wx.setStorage({
-      key: 'userinfo',
-      data: app.globalData.userInfo,
-    })
     const query = Bmob.Query('Users');
     let page = this;
     wx.getStorage({
@@ -72,6 +76,10 @@ Page({
           } else {
             page.setData({
               register: true
+            })
+            wx.setStorage({
+              key: 'userinfo',
+              data: res[0]
             })
             wx.redirectTo({
               url: '../challenges/challenges?user_id='+res[0].objectId,
@@ -98,6 +106,10 @@ Page({
     create_user.set('avatar',this.data.userInfo.avatarUrl);
     create_user.save().then(res => {
       console.log(res);
+      wx.setStorage({
+        key: 'userinfo',
+        data: res
+      })
       wx.redirectTo({
         url: '../challenges/challenges?user_id='+res.objectId
       })

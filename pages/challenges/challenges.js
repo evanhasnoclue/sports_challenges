@@ -14,6 +14,21 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    let page = this;
+    wx.getStorage({
+      key: 'userinfo',
+      success: function(res) {
+
+        const query = Bmob.Query('Challenges');
+        query.include('user_id','user_id.department_id');
+        query.find().then(res => {
+          console.log(res);
+          page.setData({
+            challenges: res
+          })
+        })
+      },
+    })
   },
 
   /**
@@ -63,5 +78,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  bindshow: function (e) {
+    console.log(e);
+    wx.redirectTo({
+      url: '../show/show?id=' + e.currentTarget.dataset.id,
+    })
   }
 })
