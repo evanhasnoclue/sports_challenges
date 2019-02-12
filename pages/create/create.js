@@ -179,6 +179,7 @@ Page({
   bindPickerChange1: function (e) {
     let page = this;
     console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log(e)
     page.setData({
       category: page.data.categories[e.detail.value]
     });
@@ -187,36 +188,49 @@ Page({
 
   bindSubmit: function (e) {
     let page = this;
-    wx.request({
-      // url: 'http://localhost:3000/api/v1/sports',
-      url: app.globalData.url + '/sports',
-      method: 'POST',
-      data: {
-        user_id: page.data.user_id,
-        // page.data.user_id,
-        title: e.detail.value.title,
-        description: e.detail.value.description,
-        category: e.detail.value.category || "",
-        start_time: page.data.start_time || "",
-        end_time: page.data.end_time || "",
-        price: e.detail.value.price || 0,
-        level: e.detail.value.level || "junior",
-        capacity: e.detail.value.capacity || 1,
-        address: page.data.address || "",
-        photo: page.data.photo_url || "",
-        province: page.data.REGION_PROVINCE || "",
-        city: page.data.REGION_CITY || "",
-        district: page.data.REGION_COUNTRY || "",
-        latitude: page.data.latitude || "",
-        longitude: page.data.longitude || ""
-      },
-      success: (res) => {
-        console.log(res)
-        wx.switchTab({
-          url: '/pages/profile/profile',
-        })
-      }
+    const query = Bmob.Query('Challenges');
+    query.set("category", e.detail.value.category)
+    query.set("name",e.detail.value.title)
+    query.set("capacity", parseInt(e.detail.value.capacity))
+    query.set("location", e.detail.value.address)
+    query.set("start_time", page.data.start_time)
+    query.set("end_time", page.data.end_time)
+    query.set("description", e.detail.value.description)
+    query.save().then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
     })
+    // wx.request({
+    //   // url: 'http://localhost:3000/api/v1/sports',
+    //   url: app.globalData.url + '/sports',
+    //   method: 'POST',
+    //   data: {
+    //     user_id: page.data.user_id,
+    //     // page.data.user_id,
+    //     title: e.detail.value.title,
+    //     description: e.detail.value.description,
+    //     category: e.detail.value.category || "",
+    //     start_time: page.data.start_time || "",
+    //     end_time: page.data.end_time || "",
+    //     price: e.detail.value.price || 0,
+    //     level: e.detail.value.level || "junior",
+    //     capacity: e.detail.value.capacity || 1,
+    //     address: page.data.address || "",
+    //     photo: page.data.photo_url || "",
+    //     province: page.data.REGION_PROVINCE || "",
+    //     city: page.data.REGION_CITY || "",
+    //     district: page.data.REGION_COUNTRY || "",
+    //     latitude: page.data.latitude || "",
+    //     longitude: page.data.longitude || ""
+    //   },
+    //   success: (res) => {
+    //     console.log(res)
+    //     wx.switchTab({
+    //       url: '/pages/profile/profile',
+    //     })
+    //   }
+    // })
   },
 
   back: function () {

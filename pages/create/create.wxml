@@ -44,9 +44,7 @@
         </view>
       </view>
 
-    </view>
 
-    <view class='row-2-2'>
       <view class="input-group width-capacity">
         <view class='font-title font-primary input-tag'>Capacity</view>
         <view class='user-input'>
