@@ -1,7 +1,13 @@
 <!--pages/challenges/challenges.wxml-->
 <view class='wrapper'>
+  <view class='banner'>
+  </view>
+  <view class='BU'>
+  <view class='BU-title'>
+  <text>本BU</text>
+  </view>
   <block wx:for="{{challenges}}" wx:for-item="challenge" wx:key="challenge.objectId">
-    <view class='card' bindtap='bindshow'data-id="{{challenge.objectId}}">
+    <view wx:if="{{challenge.user_id.department_id.objectId == current_user.department_id.objectId}}" class='card' bindtap='bindshow'data-id="{{challenge.objectId}}">
       <view class='card-banner' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');">
       <view class="card-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('{{challenge.user_id.avatar}}');"></view>
       <view class='category'>{{challenge.category}}</view>
@@ -11,4 +17,21 @@
       </view>
     </view>
   </block>
+  </view>
+  <view class='BU'>
+  <view class='BU-title'>
+  <text>其他BU</text>
+  </view>
+  <block wx:for="{{challenges}}" wx:for-item="challenge" wx:key="challenge.objectId">
+    <view wx:if="{{challenge.user_id.department_id.objectId != current_user.department_id.objectId}}" class='card' bindtap='bindshow'data-id="{{challenge.objectId}}">
+      <view class='card-banner' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');">
+      <view class="card-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('{{challenge.user_id.avatar}}');"></view>
+      <view class='category'>{{challenge.category}}</view>
+      </view>
+      <view class='card-footer'>
+      <view class="title">{{ challenge.name }}</view>
+      </view>
+    </view>
+  </block>
+  </view>
 </view>
