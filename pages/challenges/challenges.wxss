@@ -7,6 +7,33 @@
   align-items: center;
 }
 
+.banner {
+  width: 100%;
+  height: 120px;
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('http://bmob-cdn-17331.b0.upaiyun.com/2019/02/14/c23921c040f5c09e80ff451e40d29c51.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.BU {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.BU-title {
+  width: 100%;
+  height: 40px;
+  margin: 5px 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  color: #ea5455;
+}
+
 .card {
   width: 90%;
   margin: 10px 20px;

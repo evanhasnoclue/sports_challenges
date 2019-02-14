@@ -21,7 +21,7 @@ Page({
       key: 'userinfo',
       success: function(res) {
         wx.redirectTo({
-          url: '../challenges/challenges?user_id=' + res.objectId,
+          url: '../challenges/challenges?user_id=' + res.data.objectId,
         })
       },
     })

@@ -18,7 +18,9 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function(res) {
-
+        page.setData({
+          current_user: res.data
+        });
         const query = Bmob.Query('Challenges');
         query.include('user_id','user_id.department_id');
         query.find().then(res => {
