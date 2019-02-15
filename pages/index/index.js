@@ -5,9 +5,12 @@ const app = getApp()
 
 Page({
   data: {
+    options: [['请选择BU', '电商OEF', '迪脉DMI', '其他BU'], ['', 'IHSh111A', 'wPciOOOA','ZONzmmmo']],
+    index: 0,
     userInfo: {},
     hasUserInfo: false,
     register: true,
+    bad_filled: [false,false],
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
@@ -17,13 +20,29 @@ Page({
     })
   },
   onLoad: function () {
+    let page = this;
+    wx.getStorage({
+      key: 'openid',
+      success: function (res) {
+        page.setData({
+          open_id: res.data
+        });
+      }
+    })
     wx.getStorage({
       key: 'userinfo',
       success: function(res) {
-        wx.redirectTo({
-          url: '../challenges/challenges?user_id=' + res.data.objectId,
-        })
+        if(res.data.objectId){
+          wx.redirectTo({
+            url: '../challenges/challenges?user_id=' + res.data.objectId,
+          })
+        }
       },
+      fail(res) {
+        page.setData({
+          register: false
+        })
+      }
     })
     if (app.globalData.userInfo) {
       this.setData({
@@ -61,60 +80,71 @@ Page({
     })
     const query = Bmob.Query('Users');
     let page = this;
-    wx.getStorage({
-      key: 'openid',
-      success: function (res) {
+    query.equalTo('open_id', '==', page.data.open_id)
+    query.find().then(res => {
+      if (res.length == 0) {
         page.setData({
-          open_id: res.data
-        });
-        query.equalTo('open_id', '==', res.data)
-        query.find().then(res => {
-          if (res.length == 0) {
-            page.setData({
-              register: false
-            })
-          } else {
-            page.setData({
-              register: true
-            })
-            wx.setStorage({
-              key: 'userinfo',
-              data: res[0]
-            })
-            wx.redirectTo({
-              url: '../challenges/challenges?user_id='+res[0].objectId,
-            })
-          }
+          register: false
+        })
+      } else {
+        page.setData({
+          register: true
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res[0]
+        })
+        wx.redirectTo({
+          url: '../challenges/challenges?user_id='+res[0].objectId,
         })
       }
     })
   },
-  
+  bindPickerChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
   bindRegister: function(e) {
     console.log(e)
+    let page = this;
     let gender = '';
-    const create_user = Bmob.Query('Users');
-    create_user.set('username',this.data.userInfo.nickName);
-    create_user.set('open_id',this.data.open_id);
-    create_user.set('profile',e.detail.value.profile.toUpperCase());
-    if(this.data.userInfo.gender){
-      gender = '男';
+    let profile = e.detail.value.profile;
+    let department = parseInt(e.detail.value.department)
+    if(profile && department){
+      const create_user = Bmob.Query('Users');
+      create_user.set('username',page.data.userInfo.nickName);
+      create_user.set('open_id',page.data.open_id);
+      create_user.set('profile',profile.toUpperCase());
+      const pointer = Bmob.Pointer('Departments')
+      const department_pointer = pointer.set(page.data.options[1][department])
+      create_user.set('department_id', department_pointer)
+      if(page.data.userInfo.gender){
+        gender = '男';
+      }else {
+        gender = '女';
+      };
+      create_user.set('gender',gender);
+      create_user.set('avatar',page.data.userInfo.avatarUrl);
+      create_user.save().then(res => {
+        console.log(res);
+        wx.setStorage({
+          key: 'userinfo',
+          data: res
+        })
+        wx.redirectTo({
+          url: '../challenges/challenges?user_id='+res.objectId
+        })
+      }).catch(err => {
+        console.log(err)
+      })
     }else {
-      gender = '女';
-    };
-    create_user.set('gender',gender);
-    create_user.set('avatar',this.data.userInfo.avatarUrl);
-    create_user.save().then(res => {
-      console.log(res);
-      wx.setStorage({
-        key: 'userinfo',
-        data: res
+      console.log('0000')
+      page.setData({
+        bad_filled: [profile ? false : true, department ? false : true]
       })
-      wx.redirectTo({
-        url: '../challenges/challenges?user_id='+res.objectId
-      })
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+    }
+
+   }
 })
