@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -54,12 +54,19 @@
 				{
 					"id": -1,
 					"name": "create",
-          "pathName": "pages/create/create"
-        },
-        {
-          "id": -1,
+					"pathName": "pages/create/create",
+					"query": ""
+				},
+				{
+					"id": -1,
 					"name": "daka",
-					"pathName": "pages/daka/daka"
+					"pathName": "pages/daka/daka",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "test",
+					"pathName": "pages/test/test"
 				}
 			]
 		}
