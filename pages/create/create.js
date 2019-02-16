@@ -34,7 +34,7 @@ Page({
           photo: res.tempFilePaths
         })
 
-        console.log(_this.data.photo)
+        console.log(_this.data.photo[0])
         var tempFilePaths = res.tempFilePaths
         var file;
         for (let item of tempFilePaths) {
@@ -160,15 +160,15 @@ Page({
     });
   },
 
-  previewMyImage: function (files) {
-    console.log(103, files.currentTarget)
-    console.log(this.data.imageData)
-    wx.previewImage({
-      // current: files.currentTarget.id,  // number of index or file path
-      current: this.data.imageData,
-      urls: [this.data.imageData]  // Array of temp files
-    })
-  },
+  // previewMyImage: function (files) {
+  //   console.log(103, files.currentTarget)
+  //   console.log(this.data.imageData)
+  //   wx.previewImage({
+  //     // current: files.currentTarget.id,  // number of index or file path
+  //     current: this.data.imageData,
+  //     urls: [this.data.imageData]  // Array of temp files
+  //   })
+  // },
 
   selectLocation: function (options) {
     let page = this
