@@ -21,6 +21,53 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
+  gotoShow: function () {
+    var _this = this
+    wx.chooseImage({
+      count: 9, // 最多可以选择的图片张数，默认9
+      sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+      success: function (res) {
+        // success
+        console.log(res)
+        _this.setData({
+          photo: res.tempFilePaths
+        })
+
+        console.log(_this.data.photo[0])
+        var tempFilePaths = res.tempFilePaths
+        var file;
+        for (let item of tempFilePaths) {
+          console.log('itemn', item)
+          file = Bmob.File('abc.jpg', item);
+        }
+        file.save().then(res => {
+          console.log(res.length);
+          console.log(res);
+          _this.setData({
+            photoChoose:res
+          })
+          console.log(_this.data)
+          // const file = res
+          // const query = Bmob.Query('Challenges');
+          // query.set('id', '91f596b27f')
+          // query.set('photo', res[0].url)
+          // query.save().then(res => {
+          //   console.log(res)
+          // })
+        })
+
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
+
+  },
+  
   onLoad: function (options) {
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -113,15 +160,15 @@ Page({
     });
   },
 
-  previewMyImage: function (files) {
-    console.log(103, files.currentTarget)
-    console.log(this.data.imageData)
-    wx.previewImage({
-      // current: files.currentTarget.id,  // number of index or file path
-      current: this.data.imageData,
-      urls: [this.data.imageData]  // Array of temp files
-    })
-  },
+  // previewMyImage: function (files) {
+  //   console.log(103, files.currentTarget)
+  //   console.log(this.data.imageData)
+  //   wx.previewImage({
+  //     // current: files.currentTarget.id,  // number of index or file path
+  //     current: this.data.imageData,
+  //     urls: [this.data.imageData]  // Array of temp files
+  //   })
+  // },
 
   selectLocation: function (options) {
     let page = this
@@ -196,6 +243,7 @@ Page({
     query.set("start_time", page.data.start_time)
     query.set("end_time", page.data.end_time)
     query.set("description", e.detail.value.description)
+    query.set("photo", page.data.photoChoose[0].url)
     query.save().then(res => {
       console.log(res)
     }).catch(err => {
