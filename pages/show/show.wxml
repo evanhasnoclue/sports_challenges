@@ -38,7 +38,12 @@
       <view class='font-title'>Description</view>
       <view class='font-content font-grey'>{{clickChallenge.description}}</view>
     </view>
+    <input type="file" id="profilePhotoFileUpload"  multiple="multiple" />
+
+
   </view>
+
+
   <view class='bottom-fixed'>
   <view class='row-actions border-top'>
     <view class='icons'>
@@ -71,3 +76,5 @@
   </view>
   </view>
 </view>
+
+

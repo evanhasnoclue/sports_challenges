@@ -1,0 +1,7 @@
+<!--pages/test/test.wxml-->
+<text>pages/test/test.wxml</text>
+<button bindtap="gotoShow">button</button>
+  <view>
+    <image class= "show-image" mode="aspectFitf" src="{{photo}}"></image>
+  </view>
+<button bindtap="inPut">upload</button>

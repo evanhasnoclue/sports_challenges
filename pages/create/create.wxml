@@ -7,7 +7,7 @@
 
 <form bindsubmit="bindSubmit">
   <view class="photo-wrapper text-center">
-    <view class="photo-container {{photo_url ? 'show' : 'default' }}" bindtap='takePhoto' style="background-image: url({{photo_url}});">
+    <view class="photo-container {{photoChoose[0].url ? 'show' : 'default' }}" bindtap='gotoShow' style="background-image: url({{photoChoose[0].url}});">
       <view wx:if="{{photo_url==nil}}" class='flex-column'>
         <image style="width:70px; height:60px;" src="../../images/upload_photo1.png"></image>
         <view class='font-content font-white font-bold'>A nice photo always helps attract more attendees...</view>

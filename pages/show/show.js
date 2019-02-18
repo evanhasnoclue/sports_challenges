@@ -12,6 +12,8 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
+
+
   onLoad: function (options) {
     const query = Bmob.Query('Challenges');
     query.include('user_id')

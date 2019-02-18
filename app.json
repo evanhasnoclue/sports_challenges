@@ -6,7 +6,8 @@
     "pages/create/create",
     "pages/profile/profile",
     "pages/daka/daka",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/test/test"
   ],
   "window":{
     "backgroundTextStyle":"light",
