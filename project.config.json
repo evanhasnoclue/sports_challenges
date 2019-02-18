@@ -67,6 +67,11 @@
 					"id": -1,
 					"name": "test",
 					"pathName": "pages/test/test"
+        },
+        {
+          "id": -1,
+					"name": "challenges",
+					"pathName": "pages/challenges/challenges"
 				}
 			]
 		}
