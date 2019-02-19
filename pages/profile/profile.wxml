@@ -2,12 +2,17 @@
 <view class='wrapper'>
   <view class='profile'>
     <view class='upper-profile'>
-      <view class='avatar'></view>
+      <view class='avatar' style="background-image: url('{{userinfo.avatar}}')"></view>
       <view class='info'>
+      <view>微信昵称: {{userinfo.username}}</view>
+      <view>ITprofile: {{userinfo.profile}}</view>
+      <view>部门: {{userinfo.department_id.BU}}</view>
       </view>
     </view>
     <view class='lower-profile'>
-      <view class='score'></view>
+      <view class='score'>
+      总积分: 110
+      </view>
       <view class='update'>
         <button class='edit'>修改资料</button>
       </view>

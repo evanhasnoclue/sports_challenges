@@ -6,14 +6,52 @@ Page({
    * Page initial data
    */
   data: {
-
+    is_login: true
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    let page = this;
+    wx.getStorage({
+      key: 'userinfo',
+      success: function(res) {
+        console.log(res);
+        const query_user = Bmob.Query('Users');
+        query_user.include('department_id');
+        query_user.get(res.data.objectId).then(res => {
+          page.setData({
+            userinfo: res
+          })
+        });
+        const query_join = Bmob.Query('Bookings');
+        query_join.include('challenge_id','challenge_id.user_id');
+        query_join.equalTo('user_id','==',res.data.objectId);
+        query_join.find().then(res => {
+          console.log('bookings',res);
+          page.setData({
+            bookings: res
+          })
+        });
+        const query_created = Bmob.Query('Challenges');
+        query_created.equalTo('user_id', '==',res.data.objectId);
+        query_created.find().then(res => {
+          console.log('created',res);
+          page.setData({
+            created: res
+          })
+        })
+      },
+      fail(res) {
+        page.setData({
+          is_login: false
+        })
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      }
+    })
   },
 
   /**
