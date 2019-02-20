@@ -6,12 +6,22 @@ Page({
    * Page initial data
    */
   data: {
-    is_login: true
+    is_login: true,
+    tabs: ["Joined", "Hosted", "Dashboard",],
+    activeIndex: 1,
+    sliderOffset: 0,
+    sliderLeft: 0,
   },
 
   /**
    * Lifecycle function--Called when page load
    */
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+  },
   onLoad: function (options) {
     let page = this;
     wx.getStorage({
