@@ -238,10 +238,10 @@ Page({
     let page = this;
     console.log(e)
    
-    // const pointer = Bmob.Pointer('Users')
-    // const poiID = pointer.set(page.data.user_id)
+    const pointer = Bmob.Pointer('Users')
+    const poiID = pointer.set(page.data.user_id)
     const query = Bmob.Query('Challenges')
-    // query.set('user_id', poiID)
+    query.set('user_id', poiID)
     // query.set("user_id", page.data.user_id)
     query.set("category", e.detail.value.category)
     query.set("name",e.detail.value.title)
