@@ -83,12 +83,13 @@ Page({
       dateTime2: obj1.dateTime
     });
     wx.getStorage({
-      key: 'current_user',
+      key: 'userinfo',
       success: (res) => {
-        console.log(res),
+        console.log(res);
           this.setData({
-            user_id: res.data.id
+            user_id: res.data.objectId
           })
+          console.log(this.data)
       }
     })
 
@@ -235,7 +236,13 @@ Page({
 
   bindSubmit: function (e) {
     let page = this;
-    const query = Bmob.Query('Challenges');
+    console.log(e)
+   
+    // const pointer = Bmob.Pointer('Users')
+    // const poiID = pointer.set(page.data.user_id)
+    const query = Bmob.Query('Challenges')
+    // query.set('user_id', poiID)
+    // query.set("user_id", page.data.user_id)
     query.set("category", e.detail.value.category)
     query.set("name",e.detail.value.title)
     query.set("capacity", parseInt(e.detail.value.capacity))
