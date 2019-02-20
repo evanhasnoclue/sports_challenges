@@ -11,7 +11,8 @@
       </view>
     </view>
     <view class='checking'>
-      <checkbox-group bindchange="checkboxChange">
+      <form class='checking-form' bindsubmit='bindcheck'>
+      <checkbox-group bindchange="checkboxChange" name='checklist'>
         <view class='checkbox'>
         <label class="checkbox-label">
         <checkbox value="{{challenge.user_id.objectId}}" checked='true' /> 
@@ -20,11 +21,13 @@
         </view>
         <view class="checkbox" wx:for="{{bookings}}" wx:for-item="booking" >
           <label class='checkbox-label'>
-          <checkbox value="{{booking.user_id.objectId}}" checked='true' /> 
+          <checkbox value="{{booking.objectId}}" checked='true' /> 
           {{booking.user_id.username}}
         </label>
         </view>
       </checkbox-group>
+      <button class='btn' form-type='submit'>打卡</button>
+      </form>
     </view>
   </view>
 </view>

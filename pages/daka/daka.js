@@ -132,5 +132,23 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  checkboxChange: function(e) {
+  },
+
+  bindcheck: function(e) {
+    console.log(e.detail.value)
+    const pointer_challenge = Bmob.Pointer('Challenges');
+    const poiChallenge = pointer_challenge.set(this.data.challenge.objectId)
+    if(e.detail.value.checklist.length >= 4) {
+      const query_score = Bmob.Query('Scores');
+      e.detail.value.checklist.forEach(booking => {
+        let pointer_booking = Bmob.Pointer('Bookings')
+        let poiBooking = pointer_booking.set(booking)
+        query_score.set("challenge_id",poiChallenge);
+
+      })
+    }
   }
 })
