@@ -1,2 +1,31 @@
 <!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<view class='wrapper'>
+  <view class='profile'>
+    <view class='upper-profile'>
+      <view class='avatar' style="background-image: url('{{userinfo.avatar}}')"></view>
+      <view class='info'>
+      <view>微信昵称: {{userinfo.username}}</view>
+      <view>ITprofile: {{userinfo.profile}}</view>
+      <view>部门: {{userinfo.department_id.BU}}</view>
+      </view>
+    </view>
+    <view class='lower-profile'>
+      <view class='score'>
+      总积分: 110
+      </view>
+      <view class='update'>
+        <button class='edit'>修改资料</button>
+      </view>
+    </view>
+  </view>
+  <view class='history'>
+    <view class='tabs'>
+      <view class='left-tab'>
+        <text>我创建的</text>
+      </view>
+      <view class='right-tab'>
+        <text>我参加的</text>
+      </view>
+    </view>
+  </view>
+</view>
