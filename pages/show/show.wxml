@@ -38,6 +38,12 @@
       <view class='font-title'>Description</view>
       <view class='font-content font-grey'>{{clickChallenge.description}}</view>
     </view>
+    <view class='row-description card-shadow padding-left'>
+      <view class='font-title'>Daka Photo</view>
+      <view class='font-content font-grey'>
+      <image class='pic' src='http://bmob-cdn-17331.b0.upaiyun.com/2019/02/18/8941afa7407f8be2809f7c4be16086b0.jpg' mode="widthFix"></image>
+      </view>
+    </view>
     <input type="file" id="profilePhotoFileUpload"  multiple="multiple" />
 
 

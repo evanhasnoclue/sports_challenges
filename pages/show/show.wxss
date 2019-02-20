@@ -328,4 +328,8 @@
   align-items: center;
 }
 
+.pic {
+  width: 100%
+}
+
 
