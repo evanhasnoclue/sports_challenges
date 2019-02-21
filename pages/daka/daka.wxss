@@ -34,9 +34,26 @@
   box-shadow: 0 1px 5px rgba(0,0,0,0.3);
 }
 
+.photo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 150px;
+  width: 100%;
+}
+
 .icon {
   width: 55px;
   height: 50px;
+}
+
+.image {
+  width: 80%;
+  height: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 .btn {
@@ -58,5 +75,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
+}
+
+.checking-part {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  margin: 10px 0;
+  width: 100%;
 }

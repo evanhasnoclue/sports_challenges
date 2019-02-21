@@ -6,28 +6,31 @@
     <view class='photo-uploader'>
       <view class='font-title'>上传打卡照片</view>
       <view class='photo'>
-        <image src='../../images/upload_photo1.png' class='icon' bindtap='gotoShow' />
-        <button class='btn' bindtap='bindUpload'>上传图片</button>
+        <image src='../../images/upload_photo1.png' class="icon {{photoChoose[0].url ? 'hidden' : '' }}" bindtap='gotoShow' />
+        <image src='{{photoChoose[0].url}}' class="image {{photoChoose[0].url ? '' : 'hidden' }}" bindtap='gotoShow' />
       </view>
     </view>
     <view class='checking'>
+      <view class='font-title'>勾选实际参与人员</view>
+      <view class='checking-part'>
       <form class='checking-form' bindsubmit='bindcheck'>
       <checkbox-group bindchange="checkboxChange" name='checklist'>
         <view class='checkbox'>
         <label class="checkbox-label">
-        <checkbox value="{{challenge.user_id.objectId}}" checked='true' /> 
+        <checkbox value="{{[challenge.objectId,challenge.user_id.objectId]}}" checked='true' /> 
           {{challenge.user_id.username}}(组织者)
         </label>
         </view>
         <view class="checkbox" wx:for="{{bookings}}" wx:for-item="booking" >
           <label class='checkbox-label'>
-          <checkbox value="{{booking.objectId}}" checked='true' /> 
+          <checkbox value="{{[booking.objectId,booking.user_id.objectId]}}" checked='true' /> 
           {{booking.user_id.username}}
         </label>
         </view>
       </checkbox-group>
       <button class='btn' form-type='submit'>打卡</button>
       </form>
+      </view>
     </view>
   </view>
 </view>

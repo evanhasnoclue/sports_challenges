@@ -59,14 +59,7 @@ Page({
 
   },
   bindUpload:function(){
-    const query = Bmob.Query('Challenges');
-    query.get(this.data.challenge.objectId).then(res => {
-      console.log(res)
-      res.set('daka_photo', this.data.photoChoose[0].url )
-      res.save()
-    }).catch(err => {
-      console.log(err)
-    })
+
   },
 
 
@@ -138,15 +131,44 @@ Page({
   },
 
   bindcheck: function(e) {
+    const query = Bmob.Query('Challenges');
+    query.get(this.data.challenge.objectId).then(res => {
+      console.log(res)
+      res.set('daka_photo', this.data.photoChoose[0].url)
+      res.save()
+    }).catch(err => {
+      console.log(err)
+    })
     console.log(e.detail.value)
+    let page = this;
     const pointer_challenge = Bmob.Pointer('Challenges');
     const poiChallenge = pointer_challenge.set(this.data.challenge.objectId)
     if(e.detail.value.checklist.length >= 4) {
-      const query_score = Bmob.Query('Scores');
       e.detail.value.checklist.forEach(booking => {
+        let query_score = Bmob.Query('Scores');
+        let ids = booking.split(',');
+        console.log(ids)
         let pointer_booking = Bmob.Pointer('Bookings')
-        let poiBooking = pointer_booking.set(booking)
-        query_score.set("challenge_id",poiChallenge);
+        let poiBooking = pointer_booking.set(ids[0])
+        let pointer_user = Bmob.Pointer('Users')
+        let poiUser = pointer_user.set(ids[1])
+        query_score.set("user_id",poiUser);
+        if(ids[0]==page.data.challenge.objectId){
+          console.log('orgnizar')
+          query_score.set("challenge_id", poiChallenge);
+          query_score.set("type","组织者");
+          query_score.set("score",3);
+        } else {
+          console.log('joiner')
+          query_score.set("booking_id", poiBooking);
+          query_score.set("type", "参与者");
+          query_score.set("score", 1);
+        }
+        query_score.save().then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err);
+        })
 
       })
     }

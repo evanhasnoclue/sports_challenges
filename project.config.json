@@ -37,11 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-<<<<<<< Updated upstream
-			"current": 5,
-=======
 			"current": 6,
->>>>>>> Stashed changes
 			"list": [
 				{
 					"id": -1,
