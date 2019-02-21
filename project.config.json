@@ -37,7 +37,11 @@
 			"list": []
 		},
 		"miniprogram": {
+<<<<<<< Updated upstream
 			"current": 5,
+=======
+			"current": 6,
+>>>>>>> Stashed changes
 			"list": [
 				{
 					"id": -1,
@@ -66,10 +70,11 @@
 				{
 					"id": -1,
 					"name": "test",
-					"pathName": "pages/test/test"
-        },
-        {
-          "id": -1,
+					"pathName": "pages/test/test",
+					"query": ""
+				},
+				{
+					"id": -1,
 					"name": "challenges",
 					"pathName": "pages/challenges/challenges",
 					"query": ""
