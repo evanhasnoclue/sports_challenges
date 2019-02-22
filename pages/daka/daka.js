@@ -65,7 +65,8 @@ Page({
 
   onLoad: function (options) {
     let page = this;
-    let challenge_id = 'ZIrt444A';
+    let challenge_id = options.id;
+    console.log(challenge_id)
     const query = Bmob.Query('Bookings');
     query.equalTo('challenge_id', '==', challenge_id);
     query.include('challenge_id', 'user_id','challenge_id.user_id');
@@ -75,6 +76,8 @@ Page({
         challenge: res[0].challenge_id,
         bookings: res
       })
+    }).catch(err => {
+      console.log(err)
     })
   },
 
