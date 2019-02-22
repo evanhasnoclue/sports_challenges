@@ -28,8 +28,8 @@
           <view class='font-content'>{{participants.length}}/{{clickChallenge.capacity}}</view>
         </view>
         <scroll-view class='users' scroll-x>
-          <block wx:for='{{sport.bookings}}' wx:key="booking.id" wx:for-item="booking">
-            <image bindtap='checkUser' data-id='{{booking.user.id}}' src='{{booking.user.avatarUrl}}' class='avatar avatar-small' />
+          <block wx:for='{{participants}}' wx:key="user.user_id.objectId" wx:for-item="user">
+            <image bindtap='checkUser' data-id='{{user.user_id.objectId}}' src='{{user.user_id.avatar}}' class='avatar avatar-small' />
           </block>
         </scroll-view>
       </view>
@@ -58,11 +58,6 @@
         <image src='../../images/home-grey.png' class='icon' />
         <view class='margin-kill font-content font-grey'>home</view>
       </view>
-      <view class='icon-box' bindtap='bindLike'>
-        <image src='../../images/heart-grey.png' class="icon {{liked ? 'hidden' : 'show'}}" />
-        <image src='../../images/heart-primary.png' class="icon {{liked ? 'show' : 'hidden'}}" />
-        <view class='margin-kill font-content font-grey'>{{sport.like}}</view>
-      </view>
      
        <button class='share-btn margin-kill' open-type='share' >
         <view class='icon-box'>
@@ -73,11 +68,11 @@
 
     </view>
     <view class='buttons'>
-      <block wx:if='{{current_user_id!=sport.user.id}}'>
-        <button wx:if='{{!booking}}' class='btn btn-small' bindtap='bookSports' open-type="getUserInfo" >Join</button>
-        <button wx:if='{{booking}}' class='btn btn-small' bindtap='cancelBooking'>Cancel</button>
+      <block wx:if='{{!is_owner}}'>
+        <button wx:if='{{!is_booked}}' class='btn btn-small' bindtap='bookSports' open-type="getUserInfo" >Join</button>
+        <button wx:if='{{is_booked}}' class='btn btn-small' bindtap='cancelBooking'>Cancel</button>
       </block>
-      <button wx:if='{{current_user_id===sport.user.id}}' class='btn btn-small' bindtap='deleteSports'>Delete</button>
+      <button wx:if='{{is_owner}}' class='btn btn-small' bindtap='deleteSports'>Delete</button>
     </view>
   </view>
   </view>

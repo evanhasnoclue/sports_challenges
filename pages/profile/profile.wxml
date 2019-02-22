@@ -11,7 +11,7 @@
     </view>
     <view class='lower-profile'>
       <view class='score'>
-      总积分: 110
+      总积分: {{score}}
       </view>
       <view class='update'>
         <button class='edit'>修改资料</button>
@@ -19,22 +19,7 @@
     </view>
   </view>
   <view class='history'>
-    <view class='tabs'>
-      <view class='left-tab'>
-        <text>我创建的</text>
-      </view>
-      <view class='right-tab'>
-        <text>我参加的</text>
-      </view>
-    </view>
-  </view>
-</view>
-
-
-
-<view class="page">
-  <view class="page__bd">
-    <view class="weui-tab">
+    <view class='weui-tab'>
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
@@ -45,12 +30,20 @@
       </view>
       <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
- 
+          <block wx:for="{{created}}" wx:for-item="challenge" wx:key="{{challenge.objectId}}">
+          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');">
+          <view class="title">{{ challenge.name }}</view>
+          <view class="btn" bindtap="binddaka" id="{{challenge.objectId}}">{{ challenge.status }}</view>
+          </view>
+          </block>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-
-        </view>
-          <view class="weui-tab__content" hidden="{{activeIndex != 2}}"  >
+          <block wx:for="{{bookings}}" wx:for-item="booking" wx:key="{{booking.challenge_id.objectId}}">
+          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{booking.challenge_id.photo}}');">
+          <view class="title">{{ booking.challenge_id.name }}</view>
+          <view class="{{booking.challenge_id.status == '已打卡' ? 'btn-done' : 'btn' }}">{{ booking.challenge_id.status }}</view>
+          </view>
+          </block>
         </view>
       </view>
     </view>
