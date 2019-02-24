@@ -13,6 +13,17 @@
   background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('http://bmob-cdn-17331.b0.upaiyun.com/2019/02/14/c23921c040f5c09e80ff451e40d29c51.jpg');
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.create {
+  color: white;
+  background-color: #ea5455;
+  border-radius: 50px;
+  padding: 6px 10px;
+  opacity: 0.8;
 }
 
 .BU {

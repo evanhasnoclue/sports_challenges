@@ -13,7 +13,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    console.log(options)
     let page = this;
     let user_id = options.id
     wx.getStorage({
@@ -93,6 +92,11 @@ Page({
     console.log(e);
     wx.redirectTo({
       url: '../show/show?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  bindNew: function (e) {
+    wx.navigateTo({
+      url: '../create/create',
     })
   }
 })
