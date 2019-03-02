@@ -8,8 +8,7 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true,
-		"autoAudits": false
+		"newFeature": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.5.0",
@@ -18,7 +17,7 @@
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -33,15 +32,10 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-<<<<<<< Updated upstream
-			"current": 5,
-=======
-			"current": 6,
->>>>>>> Stashed changes
+			"current": 7,
 			"list": [
 				{
 					"id": -1,
@@ -82,7 +76,14 @@
 				{
 					"id": -1,
 					"name": "profile",
-					"pathName": "pages/profile/profile"
+					"pathName": "pages/profile/profile",
+					"query": ""
+				},
+				{
+					"id": 7,
+					"name": "card",
+					"pathName": "pages/card/card",
+					"query": ""
 				}
 			]
 		}
