@@ -1,0 +1,52 @@
+<!--pages/create/create.wxml-->
+<!-- 
+  <view class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://kitt.lewagon.com/placeholder/cities/berlin');">
+  <h1>Go Travel Together</h1>
+  </view> -->
+
+
+<form bindsubmit="bindSubmit">
+  <view class="photo-wrapper text-center">
+    <view class="photo-container {{photoChoose[0].url ? 'show' : 'default' }}" bindtap='gotoShow' style="background-image: url({{photoChoose[0].url}});">
+      <view wx:if="{{photo_url==nil}}" class='flex-column'>
+        <image style="width:70px; height:60px;" src="../../images/upload_photo1.png"></image>
+        <view class='font-content font-white font-bold'>Present your self in the sports' photo...</view>
+      </view>
+    </view>
+    <!-- <view bindtap='takePhoto' class="photo-container">
+      Add photo
+    </view> -->
+  </view>
+  <view class='wrapper'>
+    <view class='row-2'>
+      <view class='input-group width-category'>
+      <view class="font-title font-primary input-tag">Category</view>
+        <view class="user-input">
+          <view class="text-area-wrap">
+            <textarea value="{{category}}" style="input-size" placeholder="sports" class="input-height" name="category" maxlength="-1" auto-height />
+          </view>
+          <picker bindchange="bindPickerChange1" range="{{categories}}">
+            <image class='icon' bindtap='bindPickerChange1' style="width: 25px; height: 25px;padding-top:12px;" src="../../images/pulldown.png"></image>
+          </picker>
+        </view>
+      </view>
+      </view>
+
+    <view class="input-group row-4">
+    <view class='font-title font-primary input-tag'>Description</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea name="description" value="{{description}}" class="weui-textarea" placeholder="Please enter your plan of this event" style="height: 40vh" bindinput='countText' />
+          <view class="weui-textarea-counter">{{description.length}}/500</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='bottons'>
+  <button style="margin-bottom:5px" class="btn-primary" formType="submit" loading="{{loading}}">Submit</button>
+  <button style="margin-bottom:10" class="btn-warning" bindtap='back' loading="{{loading}}">Back</button>
+  </view>
+</form>
