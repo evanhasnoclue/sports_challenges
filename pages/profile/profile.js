@@ -7,8 +7,8 @@ Page({
    */
   data: {
     is_login: true,
-    tabs: ["Joined", "Hosted", "Dashboard",],
-    activeIndex: 1,
+    tabs: ["我创建的", "我参加的"],
+    activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
   },
@@ -50,6 +50,18 @@ Page({
           console.log('created',res);
           page.setData({
             created: res
+          })
+        })
+        const query_score = Bmob.Query('Scores');
+        query_score.equalTo('user_id','==',res.data.objectId);
+        query_score.find().then(res => {
+          console.log('scores',res);
+          let total_score = 0;
+          res.forEach(score => {
+            total_score += score.score
+          })
+          page.setData({
+            score: total_score
           })
         })
       },
@@ -111,5 +123,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  binddaka: function (e) {
+    wx.navigateTo({
+      url: '../daka/daka?id=' + e.currentTarget.id,
+    })
   }
 })

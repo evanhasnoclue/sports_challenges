@@ -6,7 +6,8 @@ Page({
    * Page initial data
    */
   data: {
-
+    is_booked: false,
+    is_owner:false
   },
 
   /**
@@ -20,6 +21,14 @@ Page({
     let page = this;
     query.get("ZIrt444A").then(res => {
       page.setData({ clickChallenge: res });
+      wx.getStorage({
+        key: 'userinfo',
+        success: function(user) {
+          if(res.user_id.objectId==user.data.objectId){
+            page.setData({is_owner:true})
+          }
+        },
+      })
     }).catch(err => {
       console.log(err)
     })
@@ -39,6 +48,17 @@ Page({
     });
     queryf.find().then(res => {
       page.setData({participants:res})
+      wx.getStorage({
+        key: 'userinfo',
+        success: function(user) {
+          res.forEach(booking => {
+            if(booking.user_id.objectId==user.data.objectId){
+              page.setData({is_booked: true})
+            }
+          })
+        },
+      })
+
     }).catch(err => {
       console.log(err)
     })
@@ -93,5 +113,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  bindHome: function () {
+    wx.switchTab({
+      url: '../challenges/challenges',
+    })
   }
 })

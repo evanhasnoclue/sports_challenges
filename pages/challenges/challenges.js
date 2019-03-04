@@ -13,10 +13,16 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    console.log(options)
     let page = this;
+    let user_id = options.id
+    wx.getStorage({
+      key: 'userinfo',
+      success: function(res) {
+        let user_id = res.data.objectId
+        console.log(res.data)
+
     const query_user = Bmob.Query('Users');
-    query_user.get(options.user_id).then(res => {
+    query_user.get(user_id).then(res => {
       page.setData({
         current_user: res
       });
@@ -28,6 +34,8 @@ Page({
       page.setData({
         challenges: res
       })
+    })
+      },
     })
   },
 
@@ -84,6 +92,11 @@ Page({
     console.log(e);
     wx.redirectTo({
       url: '../show/show?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  bindNew: function (e) {
+    wx.navigateTo({
+      url: '../create/create',
     })
   }
 })
