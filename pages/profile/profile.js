@@ -126,7 +126,7 @@ Page({
   },
 
   binddaka: function (e) {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../daka/daka?id=' + e.currentTarget.id,
     })
   }

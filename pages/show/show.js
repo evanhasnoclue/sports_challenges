@@ -115,7 +115,7 @@ Page({
 
   },
   bindHome: function () {
-    wx.redirectTo({
+    wx.switchTab({
       url: '../challenges/challenges',
     })
   }

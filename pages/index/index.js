@@ -24,6 +24,7 @@ Page({
     wx.getStorage({
       key: 'openid',
       success: function (res) {
+        console.log('open_id',res)
         page.setData({
           open_id: res.data
         });
@@ -32,9 +33,10 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function(res) {
+        console.log('userinfo',res)
         if(res.data.objectId){
-          wx.redirectTo({
-            url: '../challenges/challenges?user_id=' + res.data.objectId,
+          wx.switchTab({
+            url: '../challenges/challenges',
           })
         }
       },
@@ -80,25 +82,32 @@ Page({
     })
     const query = Bmob.Query('Users');
     let page = this;
-    query.equalTo('open_id', '==', page.data.open_id)
-    query.find().then(res => {
-      if (res.length == 0) {
-        page.setData({
-          register: false
+    wx.getStorage({
+      key: 'openid',
+      success: function(res) {
+        console.log('openid',res)
+        query.equalTo('open_id', '==', res.data)
+        query.find().then(res => {
+          if (res.length == 0) {
+            page.setData({
+              register: false
+            })
+          } else {
+            page.setData({
+              register: true
+            })
+            wx.setStorage({
+              key: 'userinfo',
+              data: res[0]
+            })
+            wx.switchTab({
+              url: '../challenges/challenges',
+            })
+          }
         })
-      } else {
-        page.setData({
-          register: true
-        })
-        wx.setStorage({
-          key: 'userinfo',
-          data: res[0]
-        })
-        wx.redirectTo({
-          url: '../challenges/challenges?user_id='+res[0].objectId,
-        })
-      }
+      },
     })
+
   },
   bindPickerChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -133,8 +142,8 @@ Page({
           key: 'userinfo',
           data: res
         })
-        wx.redirectTo({
-          url: '../challenges/challenges?user_id='+res.objectId
+        wx.switchTab({
+          url: '../challenges/challenges'
         })
       }).catch(err => {
         console.log(err)
