@@ -28,6 +28,14 @@ Page({
         page.setData({
           open_id: res.data
         });
+        const auto_login = Bmob.Query("Users");
+        auto_login.equalTo('open_id','==',res.data);
+        auto_login.find().then(res => {
+          wx.setStorage({
+            key: 'userinfo',
+            data: res[0],
+          })
+        })
       }
     })
     wx.getStorage({
@@ -122,31 +130,36 @@ Page({
     let profile = e.detail.value.profile;
     let department = parseInt(e.detail.value.department)
     if(profile && department){
-      const create_user = Bmob.Query('Users');
-      create_user.set('username',page.data.userInfo.nickName);
-      create_user.set('open_id',page.data.open_id);
-      create_user.set('profile',profile.toUpperCase());
-      const pointer = Bmob.Pointer('Departments')
-      const department_pointer = pointer.set(page.data.options[1][department])
-      create_user.set('department_id', department_pointer)
-      if(page.data.userInfo.gender){
-        gender = '男';
-      }else {
-        gender = '女';
-      };
-      create_user.set('gender',gender);
-      create_user.set('avatar',page.data.userInfo.avatarUrl);
-      create_user.save().then(res => {
-        console.log(res);
-        wx.setStorage({
-          key: 'userinfo',
-          data: res
-        })
-        wx.switchTab({
-          url: '../challenges/challenges'
-        })
-      }).catch(err => {
-        console.log(err)
+      wx.getStorage({
+        key: 'openid',
+        success: function(res) {
+          const create_user = Bmob.Query('Users');
+          create_user.set('username', page.data.userInfo.nickName);
+          create_user.set('open_id', page.data.open_id);
+          create_user.set('profile', profile.toUpperCase());
+          const pointer = Bmob.Pointer('Departments')
+          const department_pointer = pointer.set(page.data.options[1][department])
+          create_user.set('department_id', department_pointer)
+          if (page.data.userInfo.gender) {
+            gender = '男';
+          } else {
+            gender = '女';
+          };
+          create_user.set('gender', gender);
+          create_user.set('avatar', page.data.userInfo.avatarUrl);
+          create_user.save().then(res => {
+            console.log(res);
+            wx.setStorage({
+              key: 'userinfo',
+              data: res
+            })
+            wx.switchTab({
+              url: '../challenges/challenges'
+            })
+          }).catch(err => {
+            console.log(err)
+          })
+        },
       })
     }else {
       console.log('0000')

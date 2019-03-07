@@ -69,7 +69,7 @@
     </view>
     <view class='buttons'>
       <block wx:if='{{!is_owner}}'>
-        <button wx:if='{{!is_booked}}' class='btn btn-small' bindtap='bookSports' open-type="getUserInfo" >Join</button>
+        <button wx:if='{{!is_booked}}' class='btn btn-small' open-type="getUserInfo" bindgetuserinfo='bookSports' >Join</button>
         <button wx:if='{{is_booked}}' class='btn btn-small' bindtap='cancelBooking'>Cancel</button>
       </block>
       <button wx:if='{{is_owner}}' class='btn btn-small' bindtap='deleteSports'>Delete</button>
