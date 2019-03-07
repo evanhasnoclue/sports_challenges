@@ -174,6 +174,26 @@ Page({
         })
 
       })
+    } else {
+      e.detail.value.checklist.forEach(booking => {
+        let query_score = Bmob.Query('Scores');
+        let ids = booking.split(',');
+        console.log(ids)
+        let pointer_booking = Bmob.Pointer('Bookings')
+        let poiBooking = pointer_booking.set(ids[0])
+        let pointer_user = Bmob.Pointer('Users')
+        let poiUser = pointer_user.set(ids[1])
+        query_score.set("user_id", poiUser);
+        query_score.set("booking_id", poiBooking);
+        query_score.set("type", "参与者");
+        query_score.set("score", 1);
+        query_score.save().then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err);
+        })
+
+      })
     }
   }
 })
