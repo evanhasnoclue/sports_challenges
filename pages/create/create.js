@@ -251,8 +251,12 @@ Page({
     query.set("end_time", page.data.end_time)
     query.set("description", e.detail.value.description)
     query.set("photo", page.data.photoChoose[0].url)
+    query.set('status', '未打卡')
     query.save().then(res => {
       console.log(res)
+      wx.redirectTo({
+        url: '../show/show?id='+ res.objectId,
+      })
     }).catch(err => {
       console.log(err)
     })

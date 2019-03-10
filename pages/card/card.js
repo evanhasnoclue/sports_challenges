@@ -153,21 +153,30 @@ Page({
     query.set('user_id', poiID)
     // query.set("user_id", page.data.user_id)
     query.set("category", e.detail.value.category)
+    query.set('name', e.detail.value.category)
     query.set("description", e.detail.value.description)
     query.set("photo", page.data.photoChoose[0].url)
     query.set("status", "已打卡")
     query.save().then(res => {
       console.log(res)
+      const pointer_sports = Bmob.Pointer('Challenges')
+      const poiSports = pointer_sports.set(res.objectId)
+      const query_score = Bmob.Query('Scores')
+      query_score.set('user_id',poiID)
+      query_score.set('challenge_id',poiSports)
+      query_score.set('type','组织者')
+      query_score.set('score',1)
+      query_score.save().then(res => {
+        console.log(res)
+        wx.switchTab({
+          url: '/pages/profile/profile',
+        })
+      })
     }).catch(err => {
       console.log(err)
     })
   },
 
-  back: function () {
-    wx.switchTab({
-      url: '/pages/profile/profile',
-    })
-  },
 
   onGreater: function () {
     let n = this.data.capacity;

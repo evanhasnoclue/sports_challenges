@@ -17,13 +17,13 @@
       <checkbox-group bindchange="checkboxChange" name='checklist'>
         <view class='checkbox'>
         <label class="checkbox-label">
-        <checkbox value="{{[challenge.objectId,challenge.user_id.objectId]}}" checked='true' /> 
+        <checkbox value="{{[challenge.objectId,challenge.user_id.objectId,challenge.user_id.department_id.BU]}}" checked='true' /> 
           {{challenge.user_id.username}}(组织者)
         </label>
         </view>
         <view class="checkbox" wx:for="{{bookings}}" wx:for-item="booking" >
           <label class='checkbox-label'>
-          <checkbox value="{{[booking.objectId,booking.user_id.objectId]}}" checked='true' /> 
+          <checkbox value="{{[booking.objectId,booking.user_id.objectId,booking.user_id.department_id.BU]}}" checked='true' /> 
           {{booking.user_id.username}}
         </label>
         </view>

@@ -65,6 +65,7 @@
   display: flex;
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 10px;
   background-size: cover;
   background-position: center;
   align-items: center;
@@ -88,7 +89,7 @@
 }
 
 .btn-done {
-    width: 80px;
+  width: 80px;
   height: 40px;
   background-color: rgb(240,240,240);
   color: rgb(50,50,50);

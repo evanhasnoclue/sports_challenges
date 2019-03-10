@@ -34,7 +34,7 @@
           <block wx:for="{{created}}" wx:for-item="challenge" wx:key="{{challenge.objectId}}">
           <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');">
           <view class="title">{{ challenge.name }}</view>
-          <view class="btn" bindtap="binddaka" id="{{challenge.objectId}}">{{ challenge.status }}</view>
+          <view class="{{challenge.status == '已打卡' ? 'btn-done' : 'btn' }}" bindtap="{{challenge.status == '已打卡' ? '' : 'binddaka' }}" id="{{challenge.objectId}}">{{ challenge.status }}</view>
           </view>
           </block>
         </view>

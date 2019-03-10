@@ -47,6 +47,5 @@
 
 <view class='bottons'>
   <button style="margin-bottom:5px" class="btn-primary" formType="submit" loading="{{loading}}">Submit</button>
-  <button style="margin-bottom:10" class="btn-warning" bindtap='back' loading="{{loading}}">Back</button>
   </view>
 </form>
