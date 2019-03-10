@@ -15,7 +15,7 @@
       总积分: {{score}}
       </view>
       <view class='update'>
-        <button class='edit'>修改资料</button>
+        <button class='edit' style="display: none;">修改资料</button>
       </view>
     </view>
   </view>
