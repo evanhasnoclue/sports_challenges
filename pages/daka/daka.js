@@ -78,6 +78,15 @@ Page({
       })
     }).catch(err => {
       console.log(err)
+      const query_one = Bmob.Query('Challenges');
+      query_one.include('user_id','user_id.department_id')
+      query_one.get(challenge_id).then(res => {
+        console.log(res);
+        page.setData({
+          challenge: res,
+          bookings: []
+        })
+      })
     })
   },
 
@@ -92,7 +101,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    this.onload()
   },
 
   /**
@@ -165,10 +174,24 @@ Page({
           console.log('joiner')
           query_score.set("booking_id", poiBooking);
           query_score.set("type", "参与者");
-          query_score.set("score", 1);
+          if(ids[2]==page.data.challenge.user_id.department_id.BU){
+            query_score.set("score", 1);
+          }else{
+            query_score.set("score", 1.5);
+          }
         }
         query_score.save().then(res => {
           console.log(res)
+          const query_update = Bmob.Query('Challenges')
+          query_update.get(page.data.challenge.objectId).then(res => {
+            res.set('status','已打卡')
+            res.save().then(res => {
+              wx.switchTab({
+                url: '../profile/profile',
+              })
+            })
+          })
+
         }).catch(err => {
           console.log(err);
         })
@@ -189,6 +212,16 @@ Page({
         query_score.set("score", 1);
         query_score.save().then(res => {
           console.log(res)
+          const query_update = Bmob.Query('Challenges')
+          query_update.get(page.data.challenge.objectId).then(res => {
+            console.log(res)
+            res.set('status', '已打卡')
+            res.save().then(res => {
+              wx.switchTab({
+                url: '../profile/profile',
+              })
+            })
+          })
         }).catch(err => {
           console.log(err);
         })

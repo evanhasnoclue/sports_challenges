@@ -15,7 +15,7 @@
       总积分: {{score}}
       </view>
       <view class='update'>
-        <button class='edit'>修改资料</button>
+        <button class='edit' style="display: none;">修改资料</button>
       </view>
     </view>
   </view>
@@ -32,15 +32,15 @@
       <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <block wx:for="{{created}}" wx:for-item="challenge" wx:key="{{challenge.objectId}}">
-          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');">
+          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');" bindtap="bindShow" data-id="{{ challenge.objectId }}">
           <view class="title">{{ challenge.name }}</view>
-          <view class="btn" bindtap="binddaka" id="{{challenge.objectId}}">{{ challenge.status }}</view>
+          <view class="{{challenge.status == '已打卡' ? 'btn-done' : 'btn' }}" bindtap="{{challenge.status == '已打卡' ? '' : 'binddaka' }}" id="{{challenge.objectId}}">{{ challenge.status }}</view>
           </view>
           </block>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <block wx:for="{{bookings}}" wx:for-item="booking" wx:key="{{booking.challenge_id.objectId}}">
-          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{booking.challenge_id.photo}}');">
+          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{booking.challenge_id.photo}}');" bindtap="bindShow" data-id="{{ booking.challenge_id.objectId }}">
           <view class="title">{{ booking.challenge_id.name }}</view>
           <view class="{{booking.challenge_id.status == '已打卡' ? 'btn-done' : 'btn' }}">{{ booking.challenge_id.status }}</view>
           </view>

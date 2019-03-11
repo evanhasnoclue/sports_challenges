@@ -8,7 +8,7 @@ Page({
    * Page initial data
    */
   data: {
-    categories: ['All', 'running', 'fitness', 'badminton', 'basketball', 'football', 'hiking', 'swimming', 'tennis'],
+    categories: ['跑步', '健身', '羽毛球', '篮球', '足球', '登山', '游泳', '网球','舞蹈','瑜珈','飞盘','滑板','滑雪','骑行','健走','露营','徒步','水上运动','其他'],
     index: 0,
     capacity: 1,
     start_time: "2018-12-30 17:00",
@@ -153,21 +153,31 @@ Page({
     query.set('user_id', poiID)
     // query.set("user_id", page.data.user_id)
     query.set("category", e.detail.value.category)
+    query.set('name', e.detail.value.category)
     query.set("description", e.detail.value.description)
     query.set("photo", page.data.photoChoose[0].url)
+    query.set('data_photo', page.data.photoChoose[0].url)
     query.set("status", "已打卡")
     query.save().then(res => {
       console.log(res)
+      const pointer_sports = Bmob.Pointer('Challenges')
+      const poiSports = pointer_sports.set(res.objectId)
+      const query_score = Bmob.Query('Scores')
+      query_score.set('user_id',poiID)
+      query_score.set('challenge_id',poiSports)
+      query_score.set('type','组织者')
+      query_score.set('score',1)
+      query_score.save().then(res => {
+        console.log(res)
+        wx.switchTab({
+          url: '/pages/profile/profile',
+        })
+      })
     }).catch(err => {
       console.log(err)
     })
   },
 
-  back: function () {
-    wx.switchTab({
-      url: '/pages/profile/profile',
-    })
-  },
 
   onGreater: function () {
     let n = this.data.capacity;
@@ -206,7 +216,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    this.onLoad()
   },
 
   /**

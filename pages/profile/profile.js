@@ -38,6 +38,7 @@ Page({
         const query_join = Bmob.Query('Bookings');
         query_join.include('challenge_id','challenge_id.user_id');
         query_join.equalTo('user_id','==',res.data.objectId);
+        query_join.order('-challenge_id.start_time')
         query_join.find().then(res => {
           console.log('bookings',res);
           page.setData({
@@ -46,6 +47,7 @@ Page({
         });
         const query_created = Bmob.Query('Challenges');
         query_created.equalTo('user_id', '==',res.data.objectId);
+        query_created.order('-start_time')
         query_created.find().then(res => {
           console.log('created',res);
           page.setData({
@@ -87,7 +89,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    this.onLoad()
   },
 
   /**
@@ -123,6 +125,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  bindShow: function (e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '../show/show?id=' + e.currentTarget.dataset.id,
+    })
   },
 
   binddaka: function (e) {

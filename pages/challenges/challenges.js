@@ -1,4 +1,5 @@
 var Bmob = require('../../utils/Bmob-1.6.7.min.js')
+var util = require('../../utils/util.js')
 // pages/challenges/challenges.js
 Page({
 
@@ -14,7 +15,10 @@ Page({
    */
   onLoad: function (options) {
     let page = this;
-    let user_id = options.id
+    var TIME = util.formatTime(new Date());
+    this.setData({
+      time: TIME,
+    });
     wx.getStorage({
       key: 'userinfo',
       success: function(res) {
@@ -29,6 +33,8 @@ Page({
     })
     const query = Bmob.Query('Challenges');
     query.include('user_id','user_id.department_id');
+    query.equalTo('status','!=','已打卡');
+    query.equalTo('start_time','>=',TIME)
     query.find().then(res => {
       console.log(res);
       page.setData({
@@ -50,7 +56,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    this.onLoad()
   },
 
   /**

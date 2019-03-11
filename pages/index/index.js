@@ -133,9 +133,10 @@ Page({
       wx.getStorage({
         key: 'openid',
         success: function(res) {
+          console.log(res)
           const create_user = Bmob.Query('Users');
           create_user.set('username', page.data.userInfo.nickName);
-          create_user.set('open_id', page.data.open_id);
+          create_user.set('open_id', res.data);
           create_user.set('profile', profile.toUpperCase());
           const pointer = Bmob.Pointer('Departments')
           const department_pointer = pointer.set(page.data.options[1][department])
@@ -160,6 +161,9 @@ Page({
             console.log(err)
           })
         },
+        fail: function(res) {
+          page.onload();
+        }
       })
     }else {
       console.log('0000')

@@ -10,7 +10,7 @@ Page({
   data: {
     levels: ['junior', 'middle', 'expert'],
     region: ["Province", "City", "District"],
-    categories: ['All', 'running', 'fitness', 'badminton', 'basketball', 'football', 'hiking', 'swimming', 'tennis'],
+    categories: ['跑步', '健身', '羽毛球', '篮球', '足球', '登山', '游泳', '网球', '舞蹈', '瑜珈', '飞盘', '滑板', '滑雪', '骑行', '健走', '露营', '徒步', '水上运动', '其他'],
     index: 0,
     capacity: 1,
     start_time: "2018-12-30 17:00",
@@ -251,8 +251,12 @@ Page({
     query.set("end_time", page.data.end_time)
     query.set("description", e.detail.value.description)
     query.set("photo", page.data.photoChoose[0].url)
+    query.set('status', '未打卡')
     query.save().then(res => {
       console.log(res)
+      wx.redirectTo({
+        url: '../show/show?id='+ res.objectId,
+      })
     }).catch(err => {
       console.log(err)
     })

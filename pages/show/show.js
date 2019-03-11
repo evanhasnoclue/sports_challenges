@@ -29,6 +29,11 @@ Page({
             page.setData({is_owner:true})
           }
         },
+        fail: function() {
+          wx.navigateTo({
+            url: '../index/index',
+          })
+        }
       })
     }).catch(err => {
       console.log(err)
