@@ -127,6 +127,13 @@ Page({
 
   },
 
+  bindShow: function (e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '../show/show?id=' + e.currentTarget.dataset.id,
+    })
+  },
+
   binddaka: function (e) {
     wx.navigateTo({
       url: '../daka/daka?id=' + e.currentTarget.id,
