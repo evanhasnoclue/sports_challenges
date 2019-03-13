@@ -69,7 +69,7 @@ Page({
     console.log(challenge_id)
     const query = Bmob.Query('Bookings');
     query.equalTo('challenge_id', '==', challenge_id);
-    query.include('challenge_id', 'user_id','challenge_id.user_id');
+    query.include('challenge_id', 'user_id','challenge_id.user_id','user_id.department_id','challenge_id.user_id.department_id');
     query.find().then(res => {
       console.log(res);
       page.setData({
@@ -155,6 +155,13 @@ Page({
     let page = this;
     const pointer_challenge = Bmob.Pointer('Challenges');
     const poiChallenge = pointer_challenge.set(this.data.challenge.objectId)
+    let BUs = [];
+    e.detail.value.checklist.forEach(ppl => {
+      let bu = ppl.split(',')
+      if(!BUs.includes(bu[2])){
+        BUs.push(bu[2])
+      }
+    })
     if(e.detail.value.checklist.length >= 4) {
       e.detail.value.checklist.forEach(booking => {
         let query_score = Bmob.Query('Scores');
@@ -169,7 +176,11 @@ Page({
           console.log('orgnizar')
           query_score.set("challenge_id", poiChallenge);
           query_score.set("type","组织者");
-          query_score.set("score",3);
+          if(BUs.length>1){
+            query_score.set("score", 4.5);
+          }else {
+            query_score.set("score", 3);
+          }
         } else {
           console.log('joiner')
           query_score.set("booking_id", poiBooking);
@@ -195,7 +206,6 @@ Page({
         }).catch(err => {
           console.log(err);
         })
-
       })
     } else {
       e.detail.value.checklist.forEach(booking => {

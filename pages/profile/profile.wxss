@@ -85,7 +85,6 @@
   border-radius: 10px;
   font-size: 20px;
   text-align: center;
-  margin-right: 15px;
 }
 
 .btn-done {
@@ -96,7 +95,6 @@
   border-radius: 10px;
   font-size: 20px;
   text-align: center;
-  margin-right: 15px;
 }
 
 
@@ -116,6 +114,15 @@
 .explaination{
   font-size:10px;
   color:#666666;
+}
+
+.daka-area {
+  width: 80px;
+  height: 100%;
+  margin-right: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 

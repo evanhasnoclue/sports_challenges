@@ -1,18 +1,17 @@
-
 <!--pages/profile/profile.wxml-->
 <view class='wrapper'>
   <view class='profile'>
     <view class='upper-profile'>
       <view class='avatar' style="background-image: url('{{userinfo.avatar}}')"></view>
       <view class='info'>
-      <view>微信昵称: {{userinfo.username}}</view>
-      <view>ITprofile: {{userinfo.profile}}</view>
-      <view>部门: {{userinfo.department_id.BU}}</view>
+        <view>昵称: {{userinfo.username}}</view>
+        <view>ITprofile: {{userinfo.profile}}</view>
+        <view>部门: {{userinfo.department_id.BU}}</view>
       </view>
     </view>
     <view class='lower-profile'>
       <view class='score'>
-      总积分: {{score}}
+        总积分: {{score}}
       </view>
       <view class='update'>
         <button class='edit' style="display: none;">修改资料</button>
@@ -32,19 +31,37 @@
       <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <block wx:for="{{created}}" wx:for-item="challenge" wx:key="{{challenge.objectId}}">
-          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');" bindtap="bindShow" data-id="{{ challenge.objectId }}">
-          <view class="title">{{ challenge.name }}</view>
-          <view class="{{challenge.status == '已打卡' ? 'btn-done' : 'btn' }}" bindtap="{{challenge.status == '已打卡' ? '' : 'binddaka' }}" id="{{challenge.objectId}}">{{ challenge.status }}</view>
-          </view>
+            <block wx:if="{{challenge.name}}">
+            <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');" bindtap="bindShow" data-id="{{ challenge.objectId }}">
+              <view class="title">{{ challenge.name }}</view>
+              <view class='daka-area' bindtap="{{challenge.status == '已打卡' ? '' : 'binddaka' }}" id="{{challenge.objectId}}">
+                <view class="{{challenge.status == '已打卡' ? 'btn-done' : 'btn' }}" bindtap="{{challenge.status == '已打卡' ? '' : 'binddaka' }}" id="{{challenge.objectId}}">{{ challenge.status }}</view>
+              </view>
+            </view>
+            </block>
           </block>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <block wx:for="{{bookings}}" wx:for-item="booking" wx:key="{{booking.challenge_id.objectId}}">
-          <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{booking.challenge_id.photo}}');" bindtap="bindShow" data-id="{{ booking.challenge_id.objectId }}">
-          <view class="title">{{ booking.challenge_id.name }}</view>
-          <view class="{{booking.challenge_id.status == '已打卡' ? 'btn-done' : 'btn' }}">{{ booking.challenge_id.status }}</view>
-          </view>
+            <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{booking.challenge_id.photo}}');" bindtap="bindShow" data-id="{{ booking.challenge_id.objectId }}">
+              <view class="title">{{ booking.challenge_id.name }}</view>
+              <view class='daka-area'>
+              <view class="btn-done">{{ booking.challenge_id.status }}</view>
+              </view>
+            </view>
           </block>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+        <block wx:for="{{created}}" wx:for-item="challenge" wx:key="{{challenge.objectId}}">
+                    <block wx:if="{{!challenge.name}}">
+            <view class='card' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');" bindtap="bindShow" data-id="{{ challenge.objectId }}">
+              <view class="title">{{ challenge.category }}</view>
+              <view class='daka-area' bindtap="{{challenge.status == '已打卡' ? '' : 'binddaka' }}" id="{{challenge.objectId}}">
+                <view class="{{challenge.status == '已打卡' ? 'btn-done' : 'btn' }}" bindtap="{{challenge.status == '已打卡' ? '' : 'binddaka' }}" id="{{challenge.objectId}}">{{ challenge.status }}</view>
+              </view>
+            </view>
+            </block>
+            </block>
         </view>
       </view>
     </view>

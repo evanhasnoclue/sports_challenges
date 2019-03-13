@@ -22,19 +22,19 @@
         "pagePath": "pages/challenges/challenges",
         "iconPath": "images/dumbbell1.png",
         "selectedIconPath": "images/dumbbell1.png",
-        "text": "探索"
+        "text": "发现运动"
       },
       {
         "pagePath": "pages/card/card",
         "iconPath": "images/卡.png",
         "selectedIconPath": "images/卡.png",
-        "text": "打卡"
+        "text": "个人打卡"
       },
       {
         "pagePath": "pages/profile/profile",
         "iconPath": "images/user.png",
         "selectedIconPath": "images/user1.png",
-        "text": "我"
+        "text": "个人中心"
       }
     ],
     "selectedColor": "#ea5455"

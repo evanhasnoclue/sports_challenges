@@ -7,7 +7,7 @@ Page({
    */
   data: {
     is_login: true,
-    tabs: ["我创建的", "我参加的"],
+    tabs: ["我创建的", "我参加的","个人打卡"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
