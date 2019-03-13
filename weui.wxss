@@ -1076,7 +1076,7 @@ icon {
 }
 
 .weui-navbar__item.weui-bar__item_on {
-  color: #ea5455;
+  color: #0082c3;
 }
 
 .weui-navbar__slider {
@@ -1086,7 +1086,7 @@ icon {
   bottom: 0;
   width: 10em;
   height: 3px;
-  background-color: #ea5455;
+  background-color: #0082c3;
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
   transition: transform 0.3s;

@@ -20,7 +20,7 @@
 
 .create {
   color: white;
-  background-color: #0082c3;
+  background-color: #1296db;
   border-radius: 50px;
   padding: 6px 10px;
   opacity: 0.8;
@@ -42,7 +42,7 @@
   display:flex;
   justify-content: center;
   align-items: center;
-  color: #0082c3;
+  color: #1296db;
 }
 
 .card {

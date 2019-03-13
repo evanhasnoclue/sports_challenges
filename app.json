@@ -20,13 +20,13 @@
     "list": [
       {
         "pagePath": "pages/challenges/challenges",
-        "iconPath": "images/dumbbell1.png",
+        "iconPath": "images/dumbbell.png",
         "selectedIconPath": "images/dumbbell1.png",
         "text": "探索"
       },
       {
         "pagePath": "pages/card/card",
-        "iconPath": "images/卡.png",
+        "iconPath": "images/卡o.png",
         "selectedIconPath": "images/卡.png",
         "text": "打卡"
       },

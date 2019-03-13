@@ -169,7 +169,7 @@
 
 .replies {
   margin-left: 50px;
-  border-left: 3px solid #ea5455;
+  border-left: 3px solid #1296db;
 }
 
 .replies-action {
@@ -236,7 +236,7 @@
 }
 
 .font-primary {
-  color: #ea5455;
+  color: #1296db;
 }
 
 .font-grey {
@@ -273,14 +273,14 @@
 }
 
 .btn-text {
-  border: 1px solid #ea5455;
+  border: 1px solid #1296db;
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 .btn {
-  background-color: #ea5455;
+  background-color: #1296db;
   color: white;
 }
 

@@ -53,7 +53,7 @@
 }
 
 .edit {
-  background-color: #ea5455;
+  background-color: #1296db;
   color: white;
 }
 
@@ -80,7 +80,7 @@
 .btn {
   width: 80px;
   height: 40px;
-  background-color: #ea5455;
+  background-color: #1296db;
   color: white;
   border-radius: 10px;
   font-size: 20px;
@@ -146,18 +146,18 @@
   height: 100px;
   text-align: center;
   justify-content: center;
-  display:flex; 
+  display:flex;
 
 }
 
 
 .color-primary {
-  color: #0082c3;
-  border-bottom: 1rpx solid #0082c3;
+  color: #1296db;
+  border-bottom: 1rpx solid #1296db;
 }
 
 .btn {
-  background-color: #0082c3;
+  background-color: #1296db;
   color: white;
 }
 
@@ -191,7 +191,7 @@
   position: absolute;
   top: 0;
   right: -2px;
-  background-color: #ea5455;
+  background-color: #1296db;
   color: white;
   font-size: 10px;
   text-align: center;
@@ -204,7 +204,7 @@
 
 .join-badge {
   border-radius: 20px;
-  background-color: #ea5455;
+  background-color: #1296db;
   color: white;
   position: absolute;
   width: 40px;
@@ -220,7 +220,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: #ea5455;
+  background-color: #1296db;
   opacity: 0.8;
   /* width: 100%; */
   padding-top: 10px;
