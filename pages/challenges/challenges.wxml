@@ -4,8 +4,8 @@
   <view class='create'>发起新的挑战</view>
   </view>
   <view class='BU'>
-  <view class='BU-title'>
-  <text>本BU</text>
+  <view class='BU-title bg-blue'>
+  <text class='font-white'>本BU</text>
   </view>
   <block wx:for="{{challenges}}" wx:for-item="challenge" wx:key="challenge.objectId">
     <view wx:if="{{challenge.user_id.department_id.objectId == current_user.department_id.objectId}}" class='card' bindtap='bindshow'data-id="{{challenge.objectId}}">
@@ -20,8 +20,8 @@
   </block>
   </view>
   <view class='BU'>
-  <view class='BU-title'>
-  <text>其他BU</text>
+  <view class='BU-title bg-blue'>
+  <text class='font-white'>其他BU</text>
   </view>
   <block wx:for="{{challenges}}" wx:for-item="challenge" wx:key="challenge.objectId">
     <view wx:if="{{challenge.user_id.department_id.objectId != current_user.department_id.objectId}}" class='card' bindtap='bindshow'data-id="{{challenge.objectId}}">
