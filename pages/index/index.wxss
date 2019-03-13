@@ -46,18 +46,18 @@
 }
 
 .bad-filled {
-  border: 1px solid #ea5455 !important;
-  box-shadow: 0 0 3px #ea5455;
+  border: 1px solid #0082c3 !important;
+  box-shadow: 0 0 3px #0082c3;
 }
 
 .warning {
-  color: #ea5455;
+  color: #0082c3;
   font-size: 20px;
 }
 
 .btn {
   width: 100%;
-  background-color: #ea5455;
+  background-color: #0082c3;
   color: white;
 }
 
