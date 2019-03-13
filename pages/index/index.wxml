@@ -19,7 +19,7 @@
         </view>
         <view class="warning {{bad_filled[1] ? '' : 'hidden'}}">必选!</view>
         <view class="section {{bad_filled[1] ? 'bad-filled' : '' }}">
-          <picker placehold='请选择BU' name='department' bindchange="bindPickerChange" value="{{index}}" range="{{options[0]}}">
+          <picker placehold='请选择BU       ' name='department' bindchange="bindPickerChange" value="{{index}}" range="{{options[0]}}">
             <view class="picker">
               {{options[0][index]}}
             </view>

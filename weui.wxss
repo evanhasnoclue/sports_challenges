@@ -1084,7 +1084,7 @@ icon {
   content: " ";
   left: 0;
   bottom: 0;
-  width: 10em;
+  width: 7em;
   height: 3px;
   background-color: #ea5455;
   -webkit-transition: -webkit-transform 0.3s;

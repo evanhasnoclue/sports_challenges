@@ -13,7 +13,7 @@
     <view class='event-intro card-shadow padding-left'>
       <view class='row-title'>
         <view class='font-title font-bold' style="width: 80%;">{{clickChallenge.name}}</view>
-        <image bindtap='checkUser' data-id='{{sport.user.id}}' src='{{sport.user.avatarUrl}}' class='avatar avatar-small' />
+        <image bindtap='checkUser' data-id='{{clickChallenge.user_id.objectId}}' src='{{clickChallenge.user_id.avatar}}' class='avatar avatar-small' />
       </view>
       <view class='row-location' bindtap='showMap'>
         <image src='../../images/map1.png' class='icon icon-margin' />
@@ -38,10 +38,10 @@
       <view class='font-title'>简介</view>
       <view class='font-content font-grey'>{{clickChallenge.description}}</view>
     </view>
-    <view class='row-description card-shadow padding-left'>
+    <view class="row-description card-shadow padding-left {{clickChallenge.daka_photo ? 'display' : 'hidden' }}">
       <view class='font-title'>打卡照片</view>
       <view class='font-content font-grey'>
-      <image class='pic' src='http://bmob-cdn-17331.b0.upaiyun.com/2019/02/18/8941afa7407f8be2809f7c4be16086b0.jpg' mode="widthFix"></image>
+      <image class='pic' src="{{ clickChallenge.daka_photo }}" mode="widthFix"></image>
       </view>
     </view>
     <input type="file" id="profilePhotoFileUpload"  multiple="multiple" />
@@ -69,10 +69,13 @@
     </view>
     <view class='buttons'>
       <block wx:if='{{!is_owner}}'>
-        <button wx:if='{{!is_booked}}' class='btn btn-small' open-type="getUserInfo" bindgetuserinfo='bookSports' >加入</button>
-        <button wx:if='{{is_booked}}' class='btn btn-small' bindtap='cancelBooking'>取消</button>
+        <block wx:if='{{!is_booked}}'>
+        <button wx:if='{{participants.length < clickChallenge.capacity}}' class="btn btn-small " open-type="getUserInfo" bindgetuserinfo='bookSports' disabled="{{ time>clickChallenge.end_time }}">加入</button>
+        <button wx:if='{{participants.length >= clickChallenge.capacity}}' class='btn btn-small done' >已满</button>
+        </block>
+        <button wx:if='{{is_booked}}' class="btn btn-small" bindtap='cancelBooking' disabled="{{ time>clickChallenge.end_time }}">取消</button>
       </block>
-      <button wx:if='{{is_owner}}' class='btn btn-small' bindtap='deleteSports'>删除</button>
+      <button wx:if='{{is_owner}}' class="btn btn-small" bindtap='deleteSports' disabled="{{ time>clickChallenge.end_time }}">删除</button>
     </view>
   </view>
   </view>

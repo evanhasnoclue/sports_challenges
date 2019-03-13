@@ -237,7 +237,24 @@ Page({
   bindSubmit: function (e) {
     let page = this;
     console.log(e)
-   
+    let must_info = [e.detail.value.category, e.detail.value.title, e.detail.value.capacity, e.detail.value.address, page.data.start_time, page.data.end_time].map(x => x ? true : false)
+    console.log('info', must_info)
+    if (must_info.includes(false)) {
+      console.log('bad input')
+      page.setData({
+        must_input: must_info
+      })
+      wx.showModal({
+        title: '提示',
+        content: '除简介描述外，其他项必填！',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          }
+        }
+      })
+    } else {
     const pointer = Bmob.Pointer('Users')
     const poiID = pointer.set(page.data.user_id)
     const query = Bmob.Query('Challenges')
@@ -250,7 +267,7 @@ Page({
     query.set("start_time", page.data.start_time)
     query.set("end_time", page.data.end_time)
     query.set("description", e.detail.value.description)
-    query.set("photo", page.data.photoChoose[0].url)
+      query.set("photo", page.data.photoChoose ? page.data.photoChoose[0].url : "http://bmob-cdn-17331.b0.upaiyun.com/2019/03/13/294e6f1240249c8680270517958709fd.jpg")
     query.set('status', '未打卡')
     query.save().then(res => {
       console.log(res)
@@ -260,6 +277,7 @@ Page({
     }).catch(err => {
       console.log(err)
     })
+    }
     // wx.request({
     //   // url: 'http://localhost:3000/api/v1/sports',
     //   url: app.globalData.url + '/sports',

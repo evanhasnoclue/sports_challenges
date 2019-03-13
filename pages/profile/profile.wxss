@@ -72,9 +72,18 @@
   justify-content: space-between;
 }
 
+.card-main {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+ margin-left: 15px;
+}
+
 .title {
   color: white;
-  margin-left: 15px;
+ 
 }
 
 .btn {
@@ -85,7 +94,6 @@
   border-radius: 10px;
   font-size: 20px;
   text-align: center;
-  margin-right: 15px;
 }
 
 .btn-done {
@@ -96,7 +104,6 @@
   border-radius: 10px;
   font-size: 20px;
   text-align: center;
-  margin-right: 15px;
 }
 
 
@@ -116,6 +123,15 @@
 .explaination{
   font-size:10px;
   color:#666666;
+}
+
+.daka-area {
+  width: 80px;
+  height: 100%;
+  margin-right: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 

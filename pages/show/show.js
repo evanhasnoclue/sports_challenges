@@ -1,4 +1,5 @@
 var Bmob = require('../../utils/Bmob-1.6.7.min.js')
+var util = require('../../utils/util.js')
 // pages/show/show.js
 Page({
 
@@ -17,6 +18,10 @@ Page({
 
   onLoad: function (options) {
     console.log(options)
+    var TIME = util.formatTime(new Date());
+    this.setData({
+      time: TIME,
+    });
     const query = Bmob.Query('Challenges');
     query.include('user_id')
     let page = this;
