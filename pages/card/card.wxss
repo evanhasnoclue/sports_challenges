@@ -102,7 +102,7 @@ textarea {
 }
 
 .default {
-  background-color: #ea5455;
+  background-color: #0082c3;
 }
 
 /* pages/picker/picker.wxss */
@@ -144,7 +144,7 @@ textarea {
 .btn-primary {
   width: 35%;
   height: 40px;
-  background-color: #ea5455;
+  background-color: #0082c3;
   color: white;
 }
 .btn-warning{
@@ -212,7 +212,7 @@ textarea {
 }
 
 .font-primary {
-  color: #ea5455;
+  color: #0082c3;
 }
 
 .wrapper {
@@ -297,7 +297,7 @@ textarea {
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 15px;
-  border-bottom: 2px solid #ea5455;
+  border-bottom: 2px solid #0082c3;
 }
 
 .picker-time {

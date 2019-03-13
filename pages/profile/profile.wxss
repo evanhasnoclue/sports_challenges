@@ -152,12 +152,12 @@
 
 
 .color-primary {
-  color: #ea5455;
-  border-bottom: 1rpx solid #ea5455;
+  color: #0082c3;
+  border-bottom: 1rpx solid #0082c3;
 }
 
 .btn {
-  background-color: #ea5455;
+  background-color: #0082c3;
   color: white;
 }
 
