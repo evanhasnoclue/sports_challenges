@@ -100,8 +100,7 @@ Page({
   /**
    * Lifecycle function--Called when page show
    */
-  onShow: function () {
-    this.onload()
+  onShow: function (options) {
   },
 
   /**
@@ -143,6 +142,23 @@ Page({
   },
 
   bindcheck: function(e) {
+    let must_info = [this.data.photoChoose].map(x => x ? true : false)
+    if (must_info.includes(false)) {
+      console.log('bad input')
+      page.setData({
+        must_input: must_info
+      })
+      wx.showModal({
+        title: '提示',
+        content: '必须上传打卡照片！',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          }
+        }
+      })
+    } else {
     const query = Bmob.Query('Challenges');
     query.get(this.data.challenge.objectId).then(res => {
       console.log(res)
@@ -238,5 +254,6 @@ Page({
 
       })
     }
+  }
   }
 })

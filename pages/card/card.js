@@ -146,14 +146,31 @@ Page({
   bindSubmit: function (e) {
     let page = this;
     console.log(e)
-
+    let must_info = [e.detail.value.category, page.data.photoChoose].map(x => x ? true : false)
+    console.log('info',must_info)
+    if (must_info.includes(false)) {
+      console.log('bad input')
+      page.setData({
+        must_input: must_info
+      })
+      wx.showModal({
+        title: '提示',
+        content: '照片和运动必填',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          }
+        }
+      })
+    } else {
     const pointer = Bmob.Pointer('Users')
     const poiID = pointer.set(page.data.user_id)
     const query = Bmob.Query('Challenges')
     query.set('user_id', poiID)
     // query.set("user_id", page.data.user_id)
+    
     query.set("category", e.detail.value.category)
-    query.set('name', e.detail.value.category)
     query.set("description", e.detail.value.description)
     query.set("photo", page.data.photoChoose[0].url)
     query.set('data_photo', page.data.photoChoose[0].url)
@@ -176,6 +193,7 @@ Page({
     }).catch(err => {
       console.log(err)
     })
+    }
   },
 
 
