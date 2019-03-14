@@ -166,6 +166,10 @@ Page({
     console.log('choose location')
     wx.getSetting({
       success: res => {
+        console.log(res.authSetting)
+        res.authSetting = {
+          "scope.userLocation" : true
+        }
         if (res.authSetting['scope.userLocation']) {
           wx.chooseLocation({
             success: function (res) {
@@ -211,7 +215,67 @@ Page({
               page.setData(addressBean);
             },
             fail: function (res) {
-              console.log(res)
+              console.log('fail')
+            }
+          })
+        }else{
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success: function() {
+              wx.chooseLocation({
+                success: function (res) {
+                  console.log(res);
+                  page.setData(
+                    {
+                      address: res.address,
+                      latitude: res.latitude,
+                      longitude: res.longitude
+                    }
+                  );
+                  var regex = /^(北京市|天津市|重庆市|上海市|香港特别行政区|澳门特别行政区)/;
+                  var REGION_PROVINCE = [];
+                  var addressBean = {
+                    REGION_PROVINCE: null,
+                    REGION_COUNTRY: null,
+                    REGION_CITY: null,
+                    ADDRESS: null
+                  };
+                  function regexAddressBean(address, addressBean) {
+                    regex = /^(.*?[市州]|.*?地区|.*?特别行政区)(.*?[市区县])(.*?)$/g;
+                    var addxress = regex.exec(address);
+                    addressBean.REGION_CITY = addxress[1];
+                    addressBean.REGION_COUNTRY = addxress[2];
+                    addressBean.ADDRESS = addxress[3] + "(" + res.name + ")";
+                    console.log(addxress);
+                  }
+                  if (!(REGION_PROVINCE = regex.exec(res.address))) {
+                    regex = /^(.*?(省|自治区))(.*?)$/;
+                    REGION_PROVINCE = regex.exec(res.address);
+                    addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
+                    regexAddressBean(REGION_PROVINCE[3], addressBean);
+                  } else {
+                    addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
+                    regexAddressBean(res.address, addressBean);
+                  }
+                  page.setData({
+                    ADDRESS_1_STR:
+                      addressBean.REGION_PROVINCE + " "
+                      + addressBean.REGION_CITY + ""
+                      + addressBean.REGION_COUNTRY
+                  });
+                  page.setData(addressBean);
+                },
+                fail: function (res) {
+                  console.log('fail')
+                }
+              })
+            },
+            fail: function() {
+              wx.openSetting({
+                success: function(res) {
+                  console.log(res.authSetting)
+                }
+              })
             }
           })
         }
