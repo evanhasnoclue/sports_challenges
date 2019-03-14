@@ -161,62 +161,63 @@ Page({
     });
   },
 
-  // previewMyImage: function (files) {
-  //   console.log(103, files.currentTarget)
-  //   console.log(this.data.imageData)
-  //   wx.previewImage({
-  //     // current: files.currentTarget.id,  // number of index or file path
-  //     current: this.data.imageData,
-  //     urls: [this.data.imageData]  // Array of temp files
-  //   })
-  // },
-
   selectLocation: function (options) {
     let page = this
-    wx.chooseLocation({
-      success: function (res) {
-        console.log(res);
-        page.setData(
-          {
-            address: res.address,
-            latitude: res.latitude,
-            longitude: res.longitude
-          }
-        );
-        var regex = /^(北京市|天津市|重庆市|上海市|香港特别行政区|澳门特别行政区)/;
-        var REGION_PROVINCE = [];
-        var addressBean = {
-          REGION_PROVINCE: null,
-          REGION_COUNTRY: null,
-          REGION_CITY: null,
-          ADDRESS: null
-        };
-        function regexAddressBean(address, addressBean) {
-          regex = /^(.*?[市州]|.*?地区|.*?特别行政区)(.*?[市区县])(.*?)$/g;
-          var addxress = regex.exec(address);
-          addressBean.REGION_CITY = addxress[1];
-          addressBean.REGION_COUNTRY = addxress[2];
-          addressBean.ADDRESS = addxress[3] + "(" + res.name + ")";
-          console.log(addxress);
+    console.log('choose location')
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userLocation']) {
+          wx.chooseLocation({
+            success: function (res) {
+              console.log(res);
+              page.setData(
+                {
+                  address: res.address,
+                  latitude: res.latitude,
+                  longitude: res.longitude
+                }
+              );
+              var regex = /^(北京市|天津市|重庆市|上海市|香港特别行政区|澳门特别行政区)/;
+              var REGION_PROVINCE = [];
+              var addressBean = {
+                REGION_PROVINCE: null,
+                REGION_COUNTRY: null,
+                REGION_CITY: null,
+                ADDRESS: null
+              };
+              function regexAddressBean(address, addressBean) {
+                regex = /^(.*?[市州]|.*?地区|.*?特别行政区)(.*?[市区县])(.*?)$/g;
+                var addxress = regex.exec(address);
+                addressBean.REGION_CITY = addxress[1];
+                addressBean.REGION_COUNTRY = addxress[2];
+                addressBean.ADDRESS = addxress[3] + "(" + res.name + ")";
+                console.log(addxress);
+              }
+              if (!(REGION_PROVINCE = regex.exec(res.address))) {
+                regex = /^(.*?(省|自治区))(.*?)$/;
+                REGION_PROVINCE = regex.exec(res.address);
+                addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
+                regexAddressBean(REGION_PROVINCE[3], addressBean);
+              } else {
+                addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
+                regexAddressBean(res.address, addressBean);
+              }
+              page.setData({
+                ADDRESS_1_STR:
+                  addressBean.REGION_PROVINCE + " "
+                  + addressBean.REGION_CITY + ""
+                  + addressBean.REGION_COUNTRY
+              });
+              page.setData(addressBean);
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
         }
-        if (!(REGION_PROVINCE = regex.exec(res.address))) {
-          regex = /^(.*?(省|自治区))(.*?)$/;
-          REGION_PROVINCE = regex.exec(res.address);
-          addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
-          regexAddressBean(REGION_PROVINCE[3], addressBean);
-        } else {
-          addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
-          regexAddressBean(res.address, addressBean);
-        }
-        page.setData({
-          ADDRESS_1_STR:
-            addressBean.REGION_PROVINCE + " "
-            + addressBean.REGION_CITY + ""
-            + addressBean.REGION_COUNTRY
-        });
-        page.setData(addressBean);
       }
     })
+   
   },
   bindRegionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value);

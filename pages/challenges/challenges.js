@@ -31,6 +31,18 @@ Page({
         current_user: res
       });
     })
+    const query_daka = Bmob.Query('Challenges');
+    query_daka.include('user_id', 'user_id.department_id');
+    query_daka.equalTo('status', '==', '已打卡');
+    query_daka.equalTo('name', '!=', '');
+    query_daka.order("-updatedAt");
+    query_daka.limit(5);
+    query_daka.find().then(res => {
+      console.log(res);
+      page.setData({
+        daka_challenges: res
+      })
+    })
     const query = Bmob.Query('Challenges');
     query.include('user_id','user_id.department_id');
     query.equalTo('status','!=','已打卡');
