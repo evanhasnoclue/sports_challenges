@@ -1,6 +1,7 @@
 var Bmob = require('../../utils/Bmob-1.6.7.min.js')
 // pages/create/create.js
 const app = getApp()
+var util = require('../../utils/util.js');
 const dateTimePicker = require('../../utils/dateTimePicker.js');
 Page({
 
@@ -69,6 +70,11 @@ Page({
   },
   
   onLoad: function (options) {
+    var TIME = util.formatTime(new Date());
+    this.setData({
+      start_time: TIME,
+      end_time: TIME
+    });
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     // 精确到分的处理，将数组的秒去掉

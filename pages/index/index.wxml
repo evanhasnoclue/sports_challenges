@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('https://images.unsplash.com/photo-1540207272480-5783d0454178?ixlib=rb-0.3.5&s=fb4506861f816f242c8aa60442779198&auto=format&fit=crop&w=800&q=60');background-size: cover;background-position: center;">
   <view class='title'>
-    Spors Challenges
+    Sports Challenges
   </view>
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='btn'> 使用微信登录 </button>
