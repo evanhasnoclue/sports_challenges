@@ -1,7 +1,7 @@
 <!--pages/challenges/challenges.wxml-->
 <view class='wrapper'>
   <view class='banner' bindtap='bindNew'>
-    <view class='create'>发起新的挑战</view>
+    <view class='create'>发起多人运动</view>
   </view>
   <view class='BU'>
     <view class='BU-title bg-blue'>
