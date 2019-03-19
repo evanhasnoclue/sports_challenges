@@ -24,6 +24,7 @@
         <view class='card-banner' style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('{{challenge.photo}}');">
           <view class="card-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('{{challenge.user_id.avatar}}');"></view>
           <view class='category'>{{challenge.category}}</view>
+          <view class='time'>{{challenge.start_time}}</view>
         </view>
         <view class='card-footer'>
           <view class="title">{{ challenge.name }}</view>

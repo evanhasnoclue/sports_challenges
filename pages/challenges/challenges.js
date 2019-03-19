@@ -46,7 +46,8 @@ Page({
     const query = Bmob.Query('Challenges');
     query.include('user_id','user_id.department_id');
     query.equalTo('status','!=','已打卡');
-    query.equalTo('start_time','>=',TIME)
+    query.equalTo('start_time','>=',TIME);
+    query.order("start_time")
     query.find().then(res => {
       console.log(res);
       page.setData({

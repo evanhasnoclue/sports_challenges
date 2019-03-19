@@ -55,15 +55,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+ 
 }
 
 .card-banner {
   width: 100%;
-  height: 70%;
+  height: 80%;
   border-radius: 10px 10px 0 0;
   background-size: cover;
   background-position: center;
+   position: relative;
 }
 
 .card-avatar {
@@ -84,9 +85,16 @@
   color: white;
 }
 
+.time {
+  position: absolute;
+  left: 10px;
+  bottom: 5px;
+  color: white;
+}
+
 .card-footer {
   width: 100%;
-  height: 30%;
+  height: 20%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
